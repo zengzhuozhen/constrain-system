@@ -21,6 +21,10 @@ func TestAddition(t *testing.T) {
 				a.SetValue("user", 20)
 				So(a.GetValue(), ShouldEqual, 20)
 				So(b.GetValue(), ShouldEqual, 10)
+				a.ForgotValue("user")
+				a.SetValue("user", 30)
+				So(a.GetValue(), ShouldEqual, 30)
+				So(b.GetValue(), ShouldEqual, 20)
 			})
 
 		})

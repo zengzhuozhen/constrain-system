@@ -14,7 +14,7 @@ type Connector struct {
 	constraints []*constrain
 	GetValue    func() float64
 	SetValue    func(source string, value float64)
-	forgotValue func(source string)
+	ForgotValue func(source string)
 	hasValue    func() bool
 	connect     func(*constrain)
 }
@@ -37,7 +37,7 @@ func MakeConnector(name string) *Connector {
 			informAllExcept(source, "new_value", c.constraints)
 		}
 	}
-	c.forgotValue = func(source string) {
+	c.ForgotValue = func(source string) {
 		if c.informant == source {
 			c.informant, c.value = "", nil
 			if c.Name != "" {

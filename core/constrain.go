@@ -41,7 +41,7 @@ func MakeTernaryConstraint(left, right []*Connector, forwardFunc, reverseFunc fu
 	}
 	forgetValue := func(source string) {
 		for _, connector := range append(left, right...) {
-			connector.forgotValue(source)
+			connector.ForgotValue(source)
 		}
 	}
 	constraint := &constrain{
