@@ -13,7 +13,7 @@ func (a *multiplicationExpr) GetVariable(name string) *core.Connector {
 }
 
 func Multiplication(left, right []*core.Connector) Expr {
-	expr := &additionExpr{
+	expr := &multiplicationExpr{
 		left:     left,
 		right:    right,
 		variable: make(map[string]*core.Connector),
