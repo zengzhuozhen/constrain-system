@@ -1,6 +1,8 @@
 package facade
 
-import "constraint-system/core"
+import (
+	"constraint-system/core"
+)
 
 func Constant(v float64) *core.Connector {
 	connector := core.MakeConnector("")
@@ -13,7 +15,7 @@ func Variable(name string) *core.Connector {
 	return connector
 }
 
-func params(c ...*core.Connector) (cc []*core.Connector) {
+func Params(c ...*core.Connector) (cc []*core.Connector) {
 	return append(cc, c...)
 }
 

@@ -8,7 +8,7 @@ import (
 func TestMultiplication(t *testing.T) {
 	Convey("乘法", t, func() {
 		Convey("a = 9 * b", func() {
-			expr := Multiplication(params(Variable("a")), params(Variable("b"), Constant(9)))
+			expr := Multiplication(Params(Variable("a")), Params(Variable("b"), Constant(9)))
 			a := expr.GetVariable("a")
 			b := expr.GetVariable("b")
 			Convey("求a", func() {
@@ -23,7 +23,7 @@ func TestMultiplication(t *testing.T) {
 			})
 		})
 		Convey("5 * a = 20 * b", func() {
-			expr := Multiplication(params(Constant(5), Variable("a")), params(Variable("b"), Constant(20)))
+			expr := Multiplication(Params(Constant(5), Variable("a")), Params(Variable("b"), Constant(20)))
 			a := expr.GetVariable("a")
 			b := expr.GetVariable("b")
 			Convey("求a", func() {

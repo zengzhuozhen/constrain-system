@@ -9,7 +9,7 @@ import (
 func TestAddition(t *testing.T) {
 	Convey("加法", t, func() {
 		Convey("a = b + 10", func() {
-			expr := Addition(params(Variable("a")), params(Variable("b"), Constant(10)))
+			expr := Addition(Params(Variable("a")), Params(Variable("b"), Constant(10)))
 			a := expr.GetVariable("a")
 			b := expr.GetVariable("b")
 			Convey("求a", func() {
@@ -25,7 +25,7 @@ func TestAddition(t *testing.T) {
 
 		})
 		Convey("20 + a = b + 10", func() {
-			expr := Addition(params(Constant(20), Variable("a")), params(Variable("b"), Constant(10)))
+			expr := Addition(Params(Constant(20), Variable("a")), Params(Variable("b"), Constant(10)))
 			a := expr.GetVariable("a")
 			b := expr.GetVariable("b")
 			Convey("求a", func() {
@@ -40,7 +40,7 @@ func TestAddition(t *testing.T) {
 			})
 		})
 		Convey("计算：a = b + c + 10 + 5,条件不满足", func() {
-			expr := Addition(params(Variable("a")), params(Variable("b"), Variable("c"), Constant(10), Constant(5)))
+			expr := Addition(Params(Variable("a")), Params(Variable("b"), Variable("c"), Constant(10), Constant(5)))
 			a := expr.GetVariable("a")
 			b := expr.GetVariable("b")
 			c := expr.GetVariable("c")
