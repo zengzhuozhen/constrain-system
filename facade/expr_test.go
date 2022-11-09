@@ -23,14 +23,19 @@ func Test_Complex_Calculate(t *testing.T) {
 				So(b.GetValue(), ShouldEqual, 17)
 			})
 		})
+
 		Convey("(2 * a) + 4 = 2 * (b + 4)", func() {
-			sumExpr := Addition(Params(Variable("tempSum")), Params(Variable("b"), Constant(4)))
-			b := sumExpr.GetVariable("b")
-			multiExpr := Multiplication(Params(Variable("tempMulti")), Params(Constant(2), sumExpr.GetVariable("tempSum")))
-			leftMultiExpr := Multiplication(Params(Constant(2), Variable("a")), Params(Variable("tempMultiLeft")))
-			a := leftMultiExpr.GetVariable("a")
-			Addition(Params(leftMultiExpr.GetVariable("tempMultiLeft"), Constant(4)),
-				Params(multiExpr.GetVariable("tempMulti")))
+			b := Variable("b")
+			a := Variable("a")
+			Equation(
+				// left
+				Addition(Params(Intermediate()), Params(
+					Multiplication(Params(Intermediate()), Params(Constant(2), a)).GetIntermediate(), Constant(4)),
+				).GetIntermediate(),
+				// right
+				Multiplication(Params(Intermediate()), Params(Constant(2),
+					Addition(Params(Intermediate()), Params(b, Constant(4))).GetIntermediate()),
+				).GetIntermediate())
 			Convey("求a", func() {
 				b.SetValue("user", 4)
 				So(a.GetValue(), ShouldEqual, 6)
