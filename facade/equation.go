@@ -2,14 +2,10 @@ package facade
 
 import (
 	"constraint-system/core"
-	"strings"
 )
 
 type equationExpr struct {
-	left         *core.Connector
-	right        *core.Connector
-	variable     map[string]*core.Connector
-	intermediate *core.Connector
+	*baseExpr
 }
 
 func (a *equationExpr) GetVariable(name string) *core.Connector {
@@ -21,20 +17,12 @@ func (a *equationExpr) GetIntermediate() *core.Connector {
 }
 
 func Equation(left, right *core.Connector) *equationExpr {
-	expr := &equationExpr{
-		left:     left,
-		right:    right,
+	expr := &equationExpr{&baseExpr{
+		left:     []*core.Connector{left},
+		right:    []*core.Connector{right},
 		variable: make(map[string]*core.Connector),
-	}
-	for _, i := range append([]*core.Connector{left}, right) {
-		if i.Name != "" {
-			expr.variable[i.Name] = i
-		}
-		if strings.Contains(i.Name, IntermediateConnectorName) {
-			expr.intermediate = i
-			expr.intermediate.Name = ""
-		}
-	}
+	}}
+	expr.Bind()
 	core.EquationConstrain(left, right)
 	return expr
 }

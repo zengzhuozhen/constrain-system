@@ -2,39 +2,19 @@ package facade
 
 import (
 	"constraint-system/core"
-	"strings"
 )
 
 type additionExpr struct {
-	left         []*core.Connector
-	right        []*core.Connector
-	variable     map[string]*core.Connector
-	intermediate *core.Connector
-}
-
-func (a *additionExpr) GetVariable(name string) *core.Connector {
-	return a.variable[name]
-}
-
-func (a *additionExpr) GetIntermediate() *core.Connector {
-	return a.intermediate
+	*baseExpr
 }
 
 func Addition(left, right []*core.Connector) Expr {
-	expr := &additionExpr{
+	expr := &additionExpr{&baseExpr{
 		left:     left,
 		right:    right,
 		variable: make(map[string]*core.Connector),
-	}
-	for _, i := range append(expr.left, expr.right...) {
-		if i.Name != "" {
-			expr.variable[i.Name] = i
-		}
-		if strings.Contains(i.Name, IntermediateConnectorName) {
-			expr.intermediate = i
-			expr.intermediate.Name = ""
-		}
-	}
+	}}
+	expr.Bind()
 	core.AdditionConstrain(expr.left, expr.right)
 	return expr
 }
