@@ -14,3 +14,5 @@ Multiplication(
     Addition(Params(Intermediate()), Params(F, Constant(-32))).GetIntermediate()))
 )
 ```
+##### Inner Structure
+![img.png](doc/img.png)
