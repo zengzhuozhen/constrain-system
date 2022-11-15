@@ -50,11 +50,8 @@ func Test_Complex_Calculate(t *testing.T) {
 
 		Convey("9C = 5(F-32)", func() {
 			C, F := Variable("c"), Variable("f")
-			Equation(
-				Multiplication(Params(Intermediate()), Params(Constant(9), C)).GetIntermediate(),
-				Multiplication(Params(Intermediate()), Params(Constant(5),
-					Addition(Params(Intermediate()), Params(F, Constant(-32))).GetIntermediate(),
-				)).GetIntermediate())
+			Multiplication(Params(Constant(9), C), Params(Constant(5),
+				Addition(Params(Intermediate()), Params(F, Constant(-32))).GetIntermediate()))
 			Convey("求c", func() {
 				F.SetValue("user", 50)
 				So(C.GetValue(), ShouldEqual, 10)

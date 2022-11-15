@@ -9,10 +9,8 @@ Use functional expression to represent
 like this:
 ```go 
 C, F := Variable("c"), Variable("f")
-Equation(
-    Multiplication(Params(Intermediate()), Params(Constant(9), C)).GetIntermediate(),
-    Multiplication(Params(Intermediate()), Params(Constant(5),
-        Addition(Params(Intermediate()), Params(F, Constant(-32))).GetIntermediate(),
-    )).GetIntermediate()
+Multiplication(
+    Params(Constant(9), C), Params(Constant(5),
+    Addition(Params(Intermediate()), Params(F, Constant(-32))).GetIntermediate()))
 )
 ```
