@@ -1,12 +1,29 @@
 # constrain-system
+
 constrain-system by SICP
 
+### overview
+implement basic mathematics:
+- addition
+- subtraction
+- substation
+- division
+- square
+- sqrt
+
+and multivariate equation
+
+
 ### How-to-Use
-Use functional expression to represent 
+
+Use functional expression to represent
+
 ```
 9C = 5(F-32)
 ```
+
 like this:
+
 ```go 
 C, F := Variable("c"), Variable("f")
 Multiplication(
@@ -14,5 +31,9 @@ Multiplication(
     Addition(Params(Intermediate()), Params(F, Constant(-32))).GetIntermediate()))
 )
 ```
+
 ##### Inner Structure
+
 ![img.png](doc/img.png)
+
+

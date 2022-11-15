@@ -1,6 +1,7 @@
 package facade
 
 import (
+	"constraint-system/core"
 	. "github.com/smartystreets/goconvey/convey"
 	"testing"
 )
@@ -61,6 +62,27 @@ func Test_Complex_Calculate(t *testing.T) {
 				C.SetValue("user", 10)
 				So(C.GetValue(), ShouldEqual, 10)
 				So(F.GetValue(), ShouldEqual, 50)
+			})
+		})
+
+		Convey("a = 2b + b^2", func() {
+			a, b := Variable("a"), Variable("b")
+			Addition(Params(a), Params(
+				Multiplication(Params(Intermediate()), Params(Constant(2), b)).GetIntermediate(), Square(b)))
+			Convey("求a", func() {
+				b.SetValue("user", 4)
+				So(a.GetValue(), ShouldEqual, 24)
+				So(b.GetValue(), ShouldEqual, 4)
+			})
+			Convey("求b,无法求解,有不同解", func() {
+				defer func() {
+					if err := recover(); err != nil {
+						So(err, ShouldEqual, core.NoValueErr)
+					}
+				}()
+				a.SetValue("user", 24)
+				So(a.GetValue(), ShouldEqual, 24)
+				So(b.GetValue(), ShouldEqual, 4)
 			})
 		})
 	})
