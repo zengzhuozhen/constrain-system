@@ -24,5 +24,20 @@ func TestSquare(t *testing.T) {
 				So(b.GetValue(), ShouldEqual, 5)
 			})
 		})
+		Convey("a^2 = 2b", func() {
+			a, b := Variable("a"), Variable("b")
+			Equation(Square(a),
+				Multiplication(Params(Intermediate()), Params(Constant(2), b)).GetIntermediate())
+			Convey("求a", func() {
+				b.SetValue("user", 18)
+				So(a.GetValue(), ShouldEqual, 6)
+				So(b.GetValue(), ShouldEqual, 18)
+			})
+			Convey("求b", func() {
+				a.SetValue("user", 10)
+				So(a.GetValue(), ShouldEqual, 10)
+				So(b.GetValue(), ShouldEqual, 50)
+			})
+		})
 	})
 }
