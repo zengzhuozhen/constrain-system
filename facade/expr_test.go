@@ -14,12 +14,12 @@ func Test_Complex_Calculate(t *testing.T) {
 			a := complexExpr.GetVariable("a")
 			b := sumExpr.GetVariable("b")
 			Convey("求a", func() {
-				b.SetValue("user", 7)
+				b.SetValue(core.PerDefineUserSource, 7)
 				So(a.GetValue(), ShouldEqual, 50)
 				So(b.GetValue(), ShouldEqual, 7)
 			})
 			Convey("求b", func() {
-				a.SetValue("user", 100)
+				a.SetValue(core.PerDefineUserSource, 100)
 				So(a.GetValue(), ShouldEqual, 100)
 				So(b.GetValue(), ShouldEqual, 17)
 			})
@@ -38,12 +38,12 @@ func Test_Complex_Calculate(t *testing.T) {
 					Addition(Params(Intermediate()), Params(b, Constant(4))).GetIntermediate()),
 				).GetIntermediate())
 			Convey("求a", func() {
-				b.SetValue("user", 4)
+				b.SetValue(core.PerDefineUserSource, 4)
 				So(a.GetValue(), ShouldEqual, 6)
 				So(b.GetValue(), ShouldEqual, 4)
 			})
 			Convey("求b", func() {
-				a.SetValue("user", 4)
+				a.SetValue(core.PerDefineUserSource, 4)
 				So(a.GetValue(), ShouldEqual, 4)
 				So(b.GetValue(), ShouldEqual, 2)
 			})
@@ -54,12 +54,12 @@ func Test_Complex_Calculate(t *testing.T) {
 			Multiplication(Params(Constant(9), C), Params(Constant(5),
 				Addition(Params(Intermediate()), Params(F, Constant(-32))).GetIntermediate()))
 			Convey("求c", func() {
-				F.SetValue("user", 50)
+				F.SetValue(core.PerDefineUserSource, 50)
 				So(C.GetValue(), ShouldEqual, 10)
 				So(F.GetValue(), ShouldEqual, 50)
 			})
 			Convey("求f", func() {
-				C.SetValue("user", 10)
+				C.SetValue(core.PerDefineUserSource, 10)
 				So(C.GetValue(), ShouldEqual, 10)
 				So(F.GetValue(), ShouldEqual, 50)
 			})

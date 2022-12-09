@@ -1,6 +1,7 @@
 package facade
 
 import (
+	"constraint-system/core"
 	. "github.com/smartystreets/goconvey/convey"
 	"testing"
 )
@@ -12,12 +13,12 @@ func TestEquation(t *testing.T) {
 			a := expr.GetVariable("a")
 			b := expr.GetVariable("b")
 			Convey("求a", func() {
-				b.SetValue("user", 10)
+				b.SetValue(core.PerDefineUserSource, 10)
 				So(a.GetValue(), ShouldEqual, 10)
 				So(b.GetValue(), ShouldEqual, 10)
 			})
 			Convey("求b", func() {
-				a.SetValue("user", 10)
+				a.SetValue(core.PerDefineUserSource, 10)
 				So(a.GetValue(), ShouldEqual, 10)
 				So(b.GetValue(), ShouldEqual, 10)
 			})
