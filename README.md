@@ -32,6 +32,12 @@ Multiplication(
 )
 ```
 
+tips: 
+```
+expr.GetVariable("a") // can't get variable in superior expr when target variable in inferior expr,
+but can predefined the variable and then inject into expr 
+```
+
 ##### Inner Structure
 
 ![img.png](doc/img.png)
