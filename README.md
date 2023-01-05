@@ -6,7 +6,7 @@ constrain-system by SICP
 implement basic mathematics:
 - addition
 - subtraction
-- substation
+- multiplication
 - division
 - square
 - sqrt
