@@ -16,7 +16,7 @@ func (a *equationExpr) GetIntermediate() *core.Connector {
 	return a.intermediate
 }
 
-func Equation(left, right *core.Connector) *equationExpr {
+func Equation(left, right *core.Connector) Expr {
 	expr := &equationExpr{&baseExpr{
 		left:     []*core.Connector{left},
 		right:    []*core.Connector{right},
