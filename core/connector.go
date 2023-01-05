@@ -7,7 +7,7 @@ import (
 )
 
 var NoValueErr = errors.New("connector hadn't value")
-var PerDefineUserSource = "user"
+var PredefineUserSource = "user"
 
 type Connector struct {
 	Name        string

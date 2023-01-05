@@ -14,12 +14,12 @@ func Test_Complex_Calculate(t *testing.T) {
 			a := complexExpr.GetVariable("a")
 			b := sumExpr.GetVariable("b")
 			Convey("求a", func() {
-				b.SetValue(core.PerDefineUserSource, 7)
+				b.SetValue(core.PredefineUserSource, 7)
 				So(a.GetValue(), ShouldEqual, 50)
 				So(b.GetValue(), ShouldEqual, 7)
 			})
 			Convey("求b", func() {
-				a.SetValue(core.PerDefineUserSource, 100)
+				a.SetValue(core.PredefineUserSource, 100)
 				So(a.GetValue(), ShouldEqual, 100)
 				So(b.GetValue(), ShouldEqual, 17)
 			})
@@ -38,12 +38,12 @@ func Test_Complex_Calculate(t *testing.T) {
 					Addition(Params(Intermediate()), Params(b, Constant(4))).GetIntermediate()),
 				).GetIntermediate())
 			Convey("求a", func() {
-				b.SetValue(core.PerDefineUserSource, 4)
+				b.SetValue(core.PredefineUserSource, 4)
 				So(a.GetValue(), ShouldEqual, 6)
 				So(b.GetValue(), ShouldEqual, 4)
 			})
 			Convey("求b", func() {
-				a.SetValue(core.PerDefineUserSource, 4)
+				a.SetValue(core.PredefineUserSource, 4)
 				So(a.GetValue(), ShouldEqual, 4)
 				So(b.GetValue(), ShouldEqual, 2)
 			})
@@ -54,12 +54,12 @@ func Test_Complex_Calculate(t *testing.T) {
 			Multiplication(Params(Constant(9), C), Params(Constant(5),
 				Addition(Params(Intermediate()), Params(F, Constant(-32))).GetIntermediate()))
 			Convey("求c", func() {
-				F.SetValue(core.PerDefineUserSource, 50)
+				F.SetValue(core.PredefineUserSource, 50)
 				So(C.GetValue(), ShouldEqual, 10)
 				So(F.GetValue(), ShouldEqual, 50)
 			})
 			Convey("求f", func() {
-				C.SetValue(core.PerDefineUserSource, 10)
+				C.SetValue(core.PredefineUserSource, 10)
 				So(C.GetValue(), ShouldEqual, 10)
 				So(F.GetValue(), ShouldEqual, 50)
 			})
@@ -69,10 +69,15 @@ func Test_Complex_Calculate(t *testing.T) {
 			a, b := Variable("a"), Variable("b")
 			Addition(Params(a), Params(
 				Multiplication(Params(Intermediate()), Params(Constant(2), b)).GetIntermediate(), Square(b)))
-			Convey("求a", func() {
+			Convey("求a,b为正数", func() {
 				b.SetValue("user", 4)
 				So(a.GetValue(), ShouldEqual, 24)
 				So(b.GetValue(), ShouldEqual, 4)
+			})
+			Convey("求a,b为负数", func() {
+				b.SetValue("user", -4)
+				So(a.GetValue(), ShouldEqual, 8)
+				So(b.GetValue(), ShouldEqual, -4)
 			})
 			Convey("求b,无法求解,有不同解", func() {
 				defer func() {

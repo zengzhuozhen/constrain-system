@@ -15,12 +15,12 @@ func TestSquare(t *testing.T) {
 				Multiplication(Params(Intermediate()), Params(Constant(2), b)).GetIntermediate(),
 			))
 			Convey("求a", func() {
-				b.SetValue(core.PerDefineUserSource, 10)
+				b.SetValue(core.PredefineUserSource, 10)
 				So(a.GetValue(), ShouldEqual, 400)
 				So(b.GetValue(), ShouldEqual, 10)
 			})
 			Convey("求b", func() {
-				a.SetValue(core.PerDefineUserSource, 100)
+				a.SetValue(core.PredefineUserSource, 100)
 				So(a.GetValue(), ShouldEqual, 100)
 				So(b.GetValue(), ShouldEqual, 5)
 			})
@@ -30,12 +30,12 @@ func TestSquare(t *testing.T) {
 			Equation(Square(a),
 				Multiplication(Params(Intermediate()), Params(Constant(2), b)).GetIntermediate())
 			Convey("求a", func() {
-				b.SetValue(core.PerDefineUserSource, 18)
+				b.SetValue(core.PredefineUserSource, 18)
 				So(a.GetValue(), ShouldEqual, 6)
 				So(b.GetValue(), ShouldEqual, 18)
 			})
 			Convey("求b", func() {
-				a.SetValue(core.PerDefineUserSource, 10)
+				a.SetValue(core.PredefineUserSource, 10)
 				So(a.GetValue(), ShouldEqual, 10)
 				So(b.GetValue(), ShouldEqual, 50)
 			})
