@@ -90,5 +90,18 @@ func Test_Complex_Calculate(t *testing.T) {
 				So(b.GetValue(), ShouldEqual, 4)
 			})
 		})
+		Convey(" c = b^2 ,b = a^2", func() {
+			a, b, c := Variable("a"), Variable("b"), Variable("c")
+			Equation(c, Square(b))
+			Equation(b, Square(a))
+			a.SetValue(core.PredefineUserSource, 2)
+			So(b.GetValue(), ShouldEqual, 4)
+			So(c.GetValue(), ShouldEqual, 16)
+			b.ForgotValue(core.PredefineUserSource)
+			c.ForgotValue(core.PredefineUserSource)
+			c.SetValue(core.PredefineUserSource, 16)
+			So(a.GetValue(), ShouldEqual, 2)
+			So(b.GetValue(), ShouldEqual, 4)
+		})
 	})
 }
