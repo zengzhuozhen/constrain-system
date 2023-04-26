@@ -3,7 +3,6 @@ package core
 import (
 	"errors"
 	"fmt"
-	"log"
 )
 
 var NoValueErr = errors.New("connector hadn't value")
@@ -43,7 +42,7 @@ func MakeConnector(name string) *Connector {
 		if c.informant == source {
 			c.informant, c.value = "", nil
 			if c.Name != "" {
-				log.Default().Printf("%s is forgotten", c.Name)
+				//log.Default().Printf("%s is forgotten", c.Name)
 			}
 			informAllExcept(source, "forget_value", c.constraints)
 		}

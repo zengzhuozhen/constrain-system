@@ -8,14 +8,6 @@ type equationExpr struct {
 	*baseExpr
 }
 
-func (a *equationExpr) GetVariable(name string) *core.Connector {
-	return a.variable[name]
-}
-
-func (a *equationExpr) GetIntermediate() *core.Connector {
-	return a.intermediate
-}
-
 func Equation(left, right *core.Connector) Expr {
 	expr := &equationExpr{&baseExpr{
 		left:     []*core.Connector{left},
