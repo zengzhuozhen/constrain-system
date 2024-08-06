@@ -13,22 +13,22 @@ type Connector struct {
 	value       *float64
 	informant   string
 	constraints []*constrain
-	GetValue    func() float64
-	SetValue    func(source string, value float64)
-	ForgotValue func(source string)
+	innerGet    func() float64
+	innerSet    func(source string, value float64)
+	innerForgot func(source string)
 	hasValue    func() bool
 	connect     func(*constrain)
 }
 
 func MakeConnector(name string) *Connector {
 	c := &Connector{Name: name}
-	c.GetValue = func() float64 {
+	c.innerGet = func() float64 {
 		if c.value == nil {
 			panic(NoValueErr)
 		}
 		return *c.value
 	}
-	c.SetValue = func(source string, value float64) {
+	c.innerSet = func(source string, value float64) {
 		if c.value != nil {
 			if *c.value != value {
 				panic(fmt.Sprintf("Contradiction detected:%.2f vs %.2f", *c.value, value))
@@ -38,7 +38,7 @@ func MakeConnector(name string) *Connector {
 			informAllExcept(source, "new_value", c.constraints)
 		}
 	}
-	c.ForgotValue = func(source string) {
+	c.innerForgot = func(source string) {
 		if c.informant == source {
 			c.informant, c.value = "", nil
 			if c.Name != "" {
@@ -54,4 +54,20 @@ func MakeConnector(name string) *Connector {
 		c.constraints = append(c.constraints, constrain)
 	}
 	return c
+}
+
+func (c *Connector) GetValue() float64 {
+	return c.innerGet()
+}
+
+func (c *Connector) SetValue(value float64) {
+	c.innerSet(PredefineUserSource, value)
+}
+
+func (c *Connector) SetConstantValue(value float64) {
+	c.innerSet("", value)
+}
+
+func (c *Connector) ForgetValue() {
+	c.innerForgot(PredefineUserSource)
 }

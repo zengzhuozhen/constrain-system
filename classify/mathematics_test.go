@@ -1,7 +1,6 @@
 package classify
 
 import (
-	"constraint-system/core"
 	"math"
 	"testing"
 )
@@ -26,29 +25,29 @@ func TestPythagorean(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run("勾股定理", func(t *testing.T) {
-			PythagoreanTheoremEdge2.SetValue(core.PredefineUserSource, tt.Edge2)
-			PythagoreanTheoremEdge3.SetValue(core.PredefineUserSource, tt.Edge3)
+			PythagoreanTheoremEdge2.SetValue(tt.Edge2)
+			PythagoreanTheoremEdge3.SetValue(tt.Edge3)
 			if tt.Edge1 != PythagoreanTheoremEdge1.GetValue() {
 				t.Errorf("failed! edge3:%f,edge2:%f,edge1:%f,result:%f", tt.Edge3, tt.Edge2, tt.Edge1, PythagoreanTheoremEdge3.GetValue())
 			}
-			PythagoreanTheoremEdge2.ForgotValue(core.PredefineUserSource)
-			PythagoreanTheoremEdge3.ForgotValue(core.PredefineUserSource)
+			PythagoreanTheoremEdge2.ForgetValue()
+			PythagoreanTheoremEdge3.ForgetValue()
 			// ************************************************* //
-			PythagoreanTheoremEdge1.SetValue(core.PredefineUserSource, tt.Edge1)
-			PythagoreanTheoremEdge2.SetValue(core.PredefineUserSource, tt.Edge2)
+			PythagoreanTheoremEdge1.SetValue(tt.Edge1)
+			PythagoreanTheoremEdge2.SetValue(tt.Edge2)
 			if tt.Edge3 != PythagoreanTheoremEdge3.GetValue() {
 				t.Errorf("failed! edge3:%f,edge2:%f,edge1:%f,result:%f", tt.Edge3, tt.Edge2, tt.Edge1, PythagoreanTheoremEdge3.GetValue())
 			}
-			PythagoreanTheoremEdge1.ForgotValue(core.PredefineUserSource)
-			PythagoreanTheoremEdge2.ForgotValue(core.PredefineUserSource)
+			PythagoreanTheoremEdge1.ForgetValue()
+			PythagoreanTheoremEdge2.ForgetValue()
 			// ************************************************* //
-			PythagoreanTheoremEdge1.SetValue(core.PredefineUserSource, tt.Edge1)
-			PythagoreanTheoremEdge3.SetValue(core.PredefineUserSource, tt.Edge3)
+			PythagoreanTheoremEdge1.SetValue(tt.Edge1)
+			PythagoreanTheoremEdge3.SetValue(tt.Edge3)
 			if tt.Edge2 != PythagoreanTheoremEdge2.GetValue() {
 				t.Errorf("failed! edge3:%f,edge2:%f,edge1:%f,result:%f", tt.Edge3, tt.Edge2, tt.Edge1, PythagoreanTheoremEdge3.GetValue())
 			}
-			PythagoreanTheoremEdge1.ForgotValue(core.PredefineUserSource)
-			PythagoreanTheoremEdge3.ForgotValue(core.PredefineUserSource)
+			PythagoreanTheoremEdge1.ForgetValue()
+			PythagoreanTheoremEdge3.ForgetValue()
 		})
 	}
 }
@@ -67,7 +66,7 @@ func TestCircleAreaExpr(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run("圆的面积", func(t *testing.T) {
-			circleAreaExprRadius.SetValue(core.PredefineUserSource, tt.Radius)
+			circleAreaExprRadius.SetValue(tt.Radius)
 			tmp := math.Round(circleAreaExprArea.GetValue() * 100)
 			if tt.Area != tmp/100 {
 				t.Errorf("failed! raduis:%f,area:%f,,result:%f", tt.Radius, tt.Area, circleAreaExprArea.GetValue())

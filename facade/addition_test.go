@@ -13,16 +13,16 @@ func TestAddition(t *testing.T) {
 			a := expr.GetVariable("a")
 			b := expr.GetVariable("b")
 			Convey("求a", func() {
-				b.SetValue(core.PredefineUserSource, 10)
+				b.SetValue(10)
 				So(a.GetValue(), ShouldEqual, 20)
 				So(b.GetValue(), ShouldEqual, 10)
 			})
 			Convey("求b", func() {
-				a.SetValue(core.PredefineUserSource, 20)
+				a.SetValue(20)
 				So(a.GetValue(), ShouldEqual, 20)
 				So(b.GetValue(), ShouldEqual, 10)
-				a.ForgotValue(core.PredefineUserSource)
-				a.SetValue(core.PredefineUserSource, 30)
+				a.ForgetValue()
+				a.SetValue(30)
 				So(a.GetValue(), ShouldEqual, 30)
 				So(b.GetValue(), ShouldEqual, 20)
 			})
@@ -33,12 +33,12 @@ func TestAddition(t *testing.T) {
 			a := expr.GetVariable("a")
 			b := expr.GetVariable("b")
 			Convey("求a", func() {
-				b.SetValue(core.PredefineUserSource, 10)
+				b.SetValue(10)
 				So(a.GetValue(), ShouldEqual, 0)
 				So(b.GetValue(), ShouldEqual, 10)
 			})
 			Convey("求b", func() {
-				a.SetValue(core.PredefineUserSource, 20)
+				a.SetValue(20)
 				So(a.GetValue(), ShouldEqual, 20)
 				So(b.GetValue(), ShouldEqual, 30)
 			})
@@ -48,7 +48,7 @@ func TestAddition(t *testing.T) {
 			a := expr.GetVariable("a")
 			b := expr.GetVariable("b")
 			c := expr.GetVariable("c")
-			b.SetValue(core.PredefineUserSource, 5)
+			b.SetValue(5)
 			defer func() {
 				if err := recover(); err != nil {
 					So(err, ShouldNotBeNil)

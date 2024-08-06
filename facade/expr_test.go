@@ -14,12 +14,12 @@ func Test_Complex_Calculate(t *testing.T) {
 			a := complexExpr.GetVariable("a")
 			b := sumExpr.GetVariable("b")
 			Convey("求a", func() {
-				b.SetValue(core.PredefineUserSource, 7)
+				b.SetValue(7)
 				So(a.GetValue(), ShouldEqual, 50)
 				So(b.GetValue(), ShouldEqual, 7)
 			})
 			Convey("求b", func() {
-				a.SetValue(core.PredefineUserSource, 100)
+				a.SetValue(100)
 				So(a.GetValue(), ShouldEqual, 100)
 				So(b.GetValue(), ShouldEqual, 17)
 			})
@@ -38,12 +38,12 @@ func Test_Complex_Calculate(t *testing.T) {
 					Addition(Params(Intermediate()), Params(b, Constant(4))).GetIntermediate()),
 				).GetIntermediate())
 			Convey("求a", func() {
-				b.SetValue(core.PredefineUserSource, 4)
+				b.SetValue(4)
 				So(a.GetValue(), ShouldEqual, 6)
 				So(b.GetValue(), ShouldEqual, 4)
 			})
 			Convey("求b", func() {
-				a.SetValue(core.PredefineUserSource, 4)
+				a.SetValue(4)
 				So(a.GetValue(), ShouldEqual, 4)
 				So(b.GetValue(), ShouldEqual, 2)
 			})
@@ -54,12 +54,12 @@ func Test_Complex_Calculate(t *testing.T) {
 			Multiplication(Params(Constant(9), C), Params(Constant(5),
 				Addition(Params(Intermediate()), Params(F, Constant(-32))).GetIntermediate()))
 			Convey("求c", func() {
-				F.SetValue(core.PredefineUserSource, 50)
+				F.SetValue(50)
 				So(C.GetValue(), ShouldEqual, 10)
 				So(F.GetValue(), ShouldEqual, 50)
 			})
 			Convey("求f", func() {
-				C.SetValue(core.PredefineUserSource, 10)
+				C.SetValue(10)
 				So(C.GetValue(), ShouldEqual, 10)
 				So(F.GetValue(), ShouldEqual, 50)
 			})
@@ -70,12 +70,12 @@ func Test_Complex_Calculate(t *testing.T) {
 			Addition(Params(a), Params(
 				Multiplication(Params(Intermediate()), Params(Constant(2), b)).GetIntermediate(), Square(b)))
 			Convey("求a,b为正数", func() {
-				b.SetValue("user", 4)
+				b.SetValue(4)
 				So(a.GetValue(), ShouldEqual, 24)
 				So(b.GetValue(), ShouldEqual, 4)
 			})
 			Convey("求a,b为负数", func() {
-				b.SetValue("user", -4)
+				b.SetValue(-4)
 				So(a.GetValue(), ShouldEqual, 8)
 				So(b.GetValue(), ShouldEqual, -4)
 			})
@@ -85,7 +85,7 @@ func Test_Complex_Calculate(t *testing.T) {
 						So(err, ShouldEqual, core.NoValueErr)
 					}
 				}()
-				a.SetValue("user", 24)
+				a.SetValue(24)
 				So(a.GetValue(), ShouldEqual, 24)
 				So(b.GetValue(), ShouldEqual, 4)
 			})
@@ -94,12 +94,12 @@ func Test_Complex_Calculate(t *testing.T) {
 			a, b, c := Variable("a"), Variable("b"), Variable("c")
 			Equation(c, Square(b))
 			Equation(b, Square(a))
-			a.SetValue(core.PredefineUserSource, 2)
+			a.SetValue(2)
 			So(b.GetValue(), ShouldEqual, 4)
 			So(c.GetValue(), ShouldEqual, 16)
-			b.ForgotValue(core.PredefineUserSource)
-			c.ForgotValue(core.PredefineUserSource)
-			c.SetValue(core.PredefineUserSource, 16)
+			b.ForgetValue()
+			c.ForgetValue()
+			c.SetValue(16)
 			So(a.GetValue(), ShouldEqual, 2)
 			So(b.GetValue(), ShouldEqual, 4)
 		})

@@ -37,11 +37,11 @@ func MakeTernaryConstraint(left, right []*Connector, forwardFunc, reverseFunc fu
 			return
 		}
 		// only one expectVariable,can do calculate
-		expectVariable.SetValue(source, calFunc(leftValues, rightValues))
+		expectVariable.innerSet(source, calFunc(leftValues, rightValues))
 	}
 	forgetValue := func(source string) {
 		for _, connector := range append(left, right...) {
-			connector.ForgotValue(source)
+			connector.innerForgot(source)
 		}
 	}
 	constraint := &constrain{

@@ -11,7 +11,7 @@ var IntermediateConnectorName = "intermediate"
 
 func Constant(v float64) *core.Connector {
 	connector := core.MakeConnector("")
-	connector.SetValue("", v)
+	connector.SetConstantValue(v)
 	return connector
 }
 
