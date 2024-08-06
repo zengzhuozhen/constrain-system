@@ -27,8 +27,8 @@ like this:
 ```go 
 C, F := Variable("c"), Variable("f")
 Multiplication(
-    Params(Constant(9), C), Params(Constant(5),
-    Addition(Params(Intermediate()), Params(F, Constant(-32))).GetIntermediate()))
+    Params(Constant(9), C),   // left
+    Params(Constant(5),Addition(Params(Intermediate()), Params(F, Constant(-32))).GetIntermediate())) // right
 )
 ```
 
